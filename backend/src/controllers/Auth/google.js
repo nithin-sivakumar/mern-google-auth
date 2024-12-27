@@ -38,7 +38,8 @@ export const loginGoogle = async (req, res) => {
       { expiresIn: process.env.JWT_TIMEOUT }
     );
 
-    createdUser.lastLogin = new Date();
+    createdUser.lastLogin = createdUser.currentLogin;
+    createdUser.currentLogin = new Date();
     await createdUser.save();
 
     return res
